@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PositionRequest;
 use App\Position;
-use Illuminate\Http\Request;
 
 class PositionController extends Controller
 {
@@ -15,7 +15,9 @@ class PositionController extends Controller
     public function index()
     {
         $position = Position::all();
-        return $position;
+        return view('pages.position.index',[
+            'position' => $position
+        ]);
     }
 
     /**
@@ -34,7 +36,7 @@ class PositionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PositionRequest $request)
     {
         //
     }
@@ -68,7 +70,7 @@ class PositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PositionRequest $request, $id)
     {
         //
     }

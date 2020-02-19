@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Education;
 use App\Http\Requests\EducationRequest;
-use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
@@ -16,7 +15,9 @@ class EducationController extends Controller
     public function index()
     {
         $education = Education::all();
-        return $education;
+        return view('pages.education.index',[
+            'education' => $education
+        ]);
     }
 
     /**
@@ -69,7 +70,7 @@ class EducationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EducationRequest $request, $id)
     {
         //
     }

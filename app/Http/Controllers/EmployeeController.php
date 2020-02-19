@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
-use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRequest;
 
 class EmployeeController extends Controller
 {
@@ -15,7 +15,9 @@ class EmployeeController extends Controller
     public function index()
     {
         $employee = Employee::all();
-        return $employee;
+        return view('pages.employee.index',[    
+            'employee' => $employee,            
+        ]);
     }
 
     /**
@@ -34,7 +36,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         //
     }
@@ -68,7 +70,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EmployeeRequest $request, $id)
     {
         //
     }

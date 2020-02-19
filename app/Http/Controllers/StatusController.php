@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StatusRequest;
 use App\Status;
-use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
@@ -15,7 +15,9 @@ class StatusController extends Controller
     public function index()
     {
         $status = Status::all();
-        return $status;
+        return view('pages.status.index',[
+            'status' => $status
+        ]);
     }
 
     /**
@@ -34,7 +36,7 @@ class StatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StatusRequest $request)
     {
         //
     }
@@ -68,7 +70,7 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StatusRequest $request, $id)
     {
         //
     }

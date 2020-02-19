@@ -14,8 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::resource('education','EducationController');
-Route::resource('employee','EmployeeController');
-Route::resource('position','PositionController');
-Route::resource('status','StatusController');
+Route::prefix('dashboard')->group(function(){
+    Route::resource('/','DashboardController');
+    Route::resource('education','EducationController');
+    Route::resource('employee','EmployeeController');
+    Route::resource('position','PositionController');
+    Route::resource('status','StatusController');
+});
