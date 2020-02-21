@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Employee</h1>
-            <a href="" class="btn btn-sm btn-primary shadow-sm">
+            <a href="{{ route('employee.create') }}'" class="btn btn-sm btn-primary shadow-sm">
                 <i class="fas fa-plus fa-sm text-white-50">Tambah Employee</i>
             </a>
         </div>
@@ -15,12 +15,13 @@
         <div class="row">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-primary">
+                    <table id="data" class="display hover cell-border compact">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Employee</th>                               
-                                <th colspan="2" class="text-center">Action</th>                                
+                                <th>Action</th>
+                                <th>del</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,3 +57,20 @@
     </div>
     <!-- /.container-fluid -->
 @endsection
+
+@prepend('css-datatable')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+@endprepend
+
+@prepend('js-datatable')
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>    
+@endprepend
+
+@push('js-datatable')
+    <script>
+        $(document).ready( function () {
+            $('#data').DataTable();
+        });            
+    </script>
+@endpush
+

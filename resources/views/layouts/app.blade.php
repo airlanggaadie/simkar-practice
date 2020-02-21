@@ -11,6 +11,7 @@
     <title>@yield('title')</title>
 
     @include('includes.style')
+    @stack('css-datatable')
 </head>
 
 <body id="page-top">
@@ -76,6 +77,7 @@
     </div>
 
    @include('includes.script')
+   @stack('js-datatable')
 </body>
 
 </html>
