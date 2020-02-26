@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Education;
 use App\Employee;
 use App\Http\Requests\EmployeeRequest;
+use App\Position;
+use App\Status;
 
 class EmployeeController extends Controller
 {
@@ -14,9 +17,12 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = Employee::all();
+        $employee = Employee::with(['status','position','education'])->get();
+        // $json = response()->json($employee);        
+        // dd($json->original);
         return view('pages.employee.index',[    
-            'employee' => $employee,            
+            'employee' => $employee
+            // 'json' => $json->original
         ]);
     }
 
@@ -27,7 +33,12 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $employee = null;
+        $education = Education::all();
+        $position = Position::all();
+        $status = Status::all();
+        // \dd($data);
+        return view('pages.employee.form', compact('employee','education','position','status'));
     }
 
     /**
@@ -38,7 +49,10 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        //
+        $data = $request->all();
+
+        Employee::create($data);
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -60,7 +74,12 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        $education = Education::all();
+        $position = Position::all();
+        $status = Status::all();
+        // \dd($data);
+        return view('pages.employee.form', compact('employee','education','position','status'));
     }
 
     /**
@@ -72,7 +91,10 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        Employee::findOrFail($id)->update($data);
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -83,6 +105,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Employee::findOrFail($id)->delete();
+        return redirect()->route('employee.index');
     }
 }
