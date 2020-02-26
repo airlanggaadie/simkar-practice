@@ -14,10 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::prefix('dashboard')->group(function(){
-    Route::resource('/','DashboardController');
+
+Route::prefix('dashboard')->middleware('auth')->group(function(){
+    Route::get('/','DashboardController@index');
     Route::resource('education','EducationController');
     Route::resource('employee','EmployeeController');
     Route::resource('position','PositionController');
     Route::resource('status','StatusController');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
