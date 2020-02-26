@@ -27,7 +27,8 @@ class EducationController extends Controller
      */
     public function create()
     {
-        
+        $education = null;
+        return view('pages.education.form', compact('education'));
     }
 
     /**
@@ -38,7 +39,8 @@ class EducationController extends Controller
      */
     public function store(EducationRequest $request)
     {
-
+        Education::create($request->all());
+        return redirect()->route('education.index');
     }
 
     /**
@@ -60,7 +62,8 @@ class EducationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $education = Education::findOrFail($id);
+        return view('pages.education.form', compact('education'));
     }
 
     /**
@@ -72,7 +75,8 @@ class EducationController extends Controller
      */
     public function update(EducationRequest $request, $id)
     {
-        //
+        Education::findOrFail($id)->update($request->all());
+        return redirect()->route('education.index');
     }
 
     /**
@@ -83,6 +87,7 @@ class EducationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Education::findOrFail($id)->delete();
+        return redirect()->route('education.index');
     }
 }
