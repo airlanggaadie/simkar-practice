@@ -27,7 +27,9 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.position.form',[
+            'position' => null
+        ]);
     }
 
     /**
@@ -38,7 +40,8 @@ class PositionController extends Controller
      */
     public function store(PositionRequest $request)
     {
-        //
+        Position::create($request->all());
+        return redirect()->route('position.index');
     }
 
     /**
@@ -60,7 +63,9 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('pages.position.form',[
+            'position' => Position::findOrFail($id)
+        ]);
     }
 
     /**
@@ -72,7 +77,8 @@ class PositionController extends Controller
      */
     public function update(PositionRequest $request, $id)
     {
-        //
+        Position::findOrFail($id)->update($request->all());
+        return redirect()->route('position.index');
     }
 
     /**
@@ -83,6 +89,7 @@ class PositionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Position::findOrFail($id)->delete();
+        return redirect()->route('position.index');
     }
 }
