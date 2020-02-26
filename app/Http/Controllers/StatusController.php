@@ -27,7 +27,9 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.status.form',[
+            'status' => null
+        ]);
     }
 
     /**
@@ -38,7 +40,8 @@ class StatusController extends Controller
      */
     public function store(StatusRequest $request)
     {
-        //
+        Status::create($request->all());
+        return redirect()->route('status.index');
     }
 
     /**
@@ -60,7 +63,9 @@ class StatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('pages.status.form',[
+            'status' => Status::findOrFail($id)
+        ]);
     }
 
     /**
@@ -72,7 +77,8 @@ class StatusController extends Controller
      */
     public function update(StatusRequest $request, $id)
     {
-        //
+        Status::findOrFail($id)->update($request->all());
+        return redirect()->route('status.index');
     }
 
     /**
@@ -83,6 +89,7 @@ class StatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Status::findOrFail($id)->delete();
+        return redirect()->route('status.index');
     }
 }
